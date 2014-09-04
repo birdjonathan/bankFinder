@@ -1,0 +1,11 @@
+{
+  "name": "bank-finder",
+  "version": "",
+  "dependencies": {
+    "bootstrap-css-only": "*",
+    "angular": "*" ,
+    "ngFx": "*",
+    "angular-ui-router": "*"
+  }
+}
+
