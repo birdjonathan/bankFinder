@@ -19,5 +19,22 @@ angular.module('bankFinder.main.map', ['ui.router', 'ngMap'])
     // called asynchronously if an error occurs
     // or server returns response with an error status.
   });
+ 
+
+
+
+
+  // var map, marker;
+
+  // var infoWindow = new google.maps.InfoWindow({
+  //     content:'Hi I am an infowindow'
+  //   });
+  //   $scope.$on('mapsInitialized', function(event, maps) {
+  //     map = maps[0], marker = map.markers[0];
+  //   });
+  //   $scope.showInfoWindow = function() {
+  //     infoWindow.open(map, marker);
+  //   }
+
   $scope.message = 'Inside Map State!';
 });
