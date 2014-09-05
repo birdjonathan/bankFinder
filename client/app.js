@@ -2,10 +2,10 @@
   'use strict';
   angular.module('bankFinder', [
     'ngFx',
-    'ui.router'
- ,'bankFinder.main'])
+    'ui.router',
+    'bankFinder.main'])
   .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/bankFinder/client/map');
+    $urlRouterProvider.otherwise('/bankFinder/main/note');
 
     $stateProvider
       .state('bankFinder', {

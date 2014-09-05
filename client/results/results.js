@@ -1,12 +1,14 @@
-(function (angular) {
-  "use strict";
-  angular.module('bankFinder.main', ['ui.router', 'bankFinder.main.note'])
-  .config(function ($stateProvider) {
-    $stateProvider
-      .state('bankFinder.main', {
-        url: '/main',
-        abstract: true,
-        templateUrl: 'main/main.tpl.html'
-      });
-  });
-}(angular));
+angular.module('bankFinder.main.results', ['ui.router'])
+
+.config(function ($stateProvider) {
+
+  $stateProvider
+    .state('bankFinder.main.results', {
+      url: '/results',
+      templateUrl: 'results/results.tpl.html',
+      controller: 'ResultsController'
+    });
+})
+.controller('ResultsController', function ($scope) {
+  $scope.message = 'Inside Results!';
+});

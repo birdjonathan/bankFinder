@@ -10,5 +10,5 @@ angular.module('bankFinder.main.note', ['ui.router'])
     });
 })
 .controller('NoteController', function ($scope) {
-  $scope.message = 'Yooo!';
+  $scope.message = 'Inside Note!';
 });
