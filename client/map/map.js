@@ -10,7 +10,7 @@ angular.module('bankFinder.main.map', ['ui.router', 'ngMap'])
     });
 })
 .controller('MapController', function ($scope, $http, $interval) {
-  $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=40.147864&lng=-82.990959'}).
+  $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=37.7833&lng=-122.4167'}).
   success(function(data, status, headers, config) {
     console.log("This is my bank info object", data);
     $scope.banks = data.locations;
@@ -22,6 +22,11 @@ angular.module('bankFinder.main.map', ['ui.router', 'ngMap'])
  
 
 
+    // $scope.$on('mapInitialized', function(event, map) {
+    
+
+    // });
+
 
 
   // var map, marker;
@@ -29,9 +34,7 @@ angular.module('bankFinder.main.map', ['ui.router', 'ngMap'])
   // var infoWindow = new google.maps.InfoWindow({
   //     content:'Hi I am an infowindow'
   //   });
-  //   $scope.$on('mapsInitialized', function(event, maps) {
-  //     map = maps[0], marker = map.markers[0];
-  //   });
+
   //   $scope.showInfoWindow = function() {
   //     infoWindow.open(map, marker);
   //   }

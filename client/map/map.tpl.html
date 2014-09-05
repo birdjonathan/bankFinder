@@ -3,9 +3,10 @@
   <section>
     {{ message }}
   <p>This is a bank address: {{banks[0].address}} </p>
-  <p ng-repeat="bank in banks">{{bank.lat}} </p>
-  </section>
-  <map center="[39.50, -98.35]" zoom="4" style="display:block; height:450px">
+ <!-- <p ng-repeat="bank in banks">{{bank.lat}} {{bank.lng}} </p>  -->
+  </section>  
+  <map center="[37.7833, -122.4167]" zoom="15" style="display:block; height:450px">
+   <marker position="current" animation="Animation.BOUNCE" centered="true"></marker>
   <marker position="[40.00, -98.45]"></marker>
   <marker ng-repeat="bank in banks" position="[{{bank.lat}}, {{bank.lng}}]"></marker>
   </map>
