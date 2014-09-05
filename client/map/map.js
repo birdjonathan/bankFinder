@@ -22,22 +22,22 @@ angular.module('bankFinder.main.map', ['ui.router', 'ngMap'])
  
 
 
-    // $scope.$on('mapInitialized', function(event, map) {
-    
+    $scope.$on('mapInitialized', function(event, map) {
+     var infoWindow = new google.maps.InfoWindow({
+      content:'Hi I am an infowindow'
+    });
 
-    // });
+    $scope.showInfoWindow = function() {
+      infoWindow.open(map, marker);
+    }
+
+    });
 
 
 
   // var map, marker;
 
-  // var infoWindow = new google.maps.InfoWindow({
-  //     content:'Hi I am an infowindow'
-  //   });
-
-  //   $scope.showInfoWindow = function() {
-  //     infoWindow.open(map, marker);
-  //   }
+ 
 
   $scope.message = 'Inside Map State!';
 });
