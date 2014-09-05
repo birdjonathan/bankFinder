@@ -1,4 +1,4 @@
-angular.module('bankFinder.main.results', ['ui.router'])
+angular.module('bankFinder.main.results', ['ui.router', 'ngMap'])
 
 .config(function ($stateProvider) {
 
