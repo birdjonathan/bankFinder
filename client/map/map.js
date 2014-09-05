@@ -9,7 +9,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
       controller: 'MapController'
     });
 })
-.controller('MapController', function ($scope, $http) { 
+.controller('MapController', function ($scope, $rootScope, $http) { 
   var siberia = new google.maps.LatLng(60, 105);
   var browserSupportFlag =  new Boolean();
 
@@ -39,11 +39,11 @@ angular.module('bankFinder.main.map', ['ui.router'])
     $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=' + $scope.coordinates.latitude + '&lng=' + $scope.coordinates.longitude}).
     success(function(data, status, headers, config) {
       console.log("This is my bank info object", data);
-      $scope.banks = data.locations;
-      console.log("This schould be an array of locations", $scope.banks);
+      $rootScope.banks = data.locations;
+      console.log("This schould be an array of locations", $rootScope.banks);
       
-      for (var i = 0; i < $scope.banks.length; i++){
-          placeMarkers($scope.banks[i]);
+      for (var i = 0; i < $rootScope.banks.length; i++){
+          placeMarkers($rootScope.banks[i]);
       }
     }).
     error(function(data, status, headers, config) {

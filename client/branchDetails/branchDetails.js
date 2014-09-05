@@ -9,6 +9,7 @@ angular.module('bankFinder.main.branchDetails', ['ui.router'])
       controller: 'BranchDetailsController'
     });
 })
-.controller('BranchDetailsController', function ($scope) {
+.controller('BranchDetailsController', function ($scope, $rootScope) {
   $scope.message = 'Inside Branch Details State!';
+  console.log("I have access to the banks object from maps view in the branch details controller", $rootScope.banks);
 });
