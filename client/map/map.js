@@ -9,13 +9,11 @@ angular.module('bankFinder.main.map', ['ui.router', 'ngMap'])
       controller: 'MapController'
     });
 })
-.controller('MapController', function ($scope, $http) {
+.controller('MapController', function ($scope, $http, $interval) {
   $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=40.147864&lng=-82.990959'}).
   success(function(data, status, headers, config) {
     console.log("This is my bank info object", data);
     $scope.banks = data.locations;
-    // this callback will be called asynchronously
-    // when the response is available
   }).
   error(function(data, status, headers, config) {
     // called asynchronously if an error occurs
