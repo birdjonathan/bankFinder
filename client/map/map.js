@@ -89,7 +89,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
         + '<p>' + bankInfo.phone + '</p>' 
         + '<a ui-sref="bankFinder.main.branchDetails({branchLat:' + bankInfo.lat + ', branchLng:' + bankInfo.lng + '})"> Click here for more info </a>' + '</div>';
         
-        google.maps.event.addListener(marker, 'click', function(){
+        google.maps.event.addListener(marker, 'mouseover', function(){
             infoWindow.setContent('<h3>' + bankInfo.bank + '</h2>' + marker.content);
             infoWindow.open($scope.map, marker);
         });
