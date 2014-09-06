@@ -87,12 +87,18 @@ angular.module('bankFinder.main.map', ['ui.router'])
         marker.content = '<div class="infoWindow">' + '<h4>' + bankInfo.name + '</h4>' 
         + '<p>' + bankInfo.address + '</p>' + '<p>' + bankInfo.locType + '</p>' 
         + '<p>' + bankInfo.phone + '</p>' 
-        + '<a ui-sref="bankFinder.main.branchDetails({branchLat:' + bankInfo.lat + ', branchLng:' + bankInfo.lng + '})"> Click here for more info </a>' + '</div>';
+        + '<a href="#/bankFinder/main/branchDetails/' + marker.lat + '/' + marker.lng + '"> Click here for more info </a>' + '</div>';
         
-        google.maps.event.addListener(marker, 'mouseover', function(){
-            infoWindow.setContent('<h3>' + bankInfo.bank + '</h2>' + marker.content);
-            infoWindow.open($scope.map, marker);
+        // google.maps.event.addListener(marker, 'mouseover', function(){
+        //   infoWindow.setContent('<h3>' + bankInfo.bank + '</h2>' + marker.content);
+        //   infoWindow.open($scope.map, marker);
+        // });
+
+        google.maps.event.addListener(marker, 'click', function(){
+          infoWindow.setContent('<h3>' + bankInfo.bank + '</h2>' + marker.content);
+          infoWindow.open($scope.map, marker);
         });
+
         
         $scope.markers.push(marker);
         
