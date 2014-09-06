@@ -4,7 +4,7 @@
       <div id="no-sidebar">    
         <div id="map" class="no-sidebar" style="height: 500px;
       width: 1100px;">  
-            <div id="class" ng-repeat="marker in markers | orderBy : 'name'">
+            <div id="class" ng-repeat="marker in markers">
               <a href="#" ng-click="openInfoWindow($event, marker)"></a>
             <a ui-sref="bankFinder.main.branchDetails({branchLat: {{marker.lat}}, branchLng: {{marker.lng}} })"> Click here for more info </a>
           </div>
@@ -14,6 +14,3 @@
   </div>    
 </div>
 
-<!-- <a ui-sref="bankFinder.main.branchDetails({branchLat:37.756941, branchLng:-122.419206})"> Click here for more info </a>
-
-http://localhost:9000/#/bankFinder/main/branchDetails/37.759935/-122.421383 -->

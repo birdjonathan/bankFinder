@@ -9,7 +9,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
       controller: 'MapController'
     });
 })
-.controller('MapController', function ($scope, $stateParams, $rootScope, $http) { 
+.controller('MapController', function ($scope, $stateParams, $http) { 
   var siberia = new google.maps.LatLng(60, 105);
   var browserSupportFlag =  new Boolean();
 
@@ -38,11 +38,11 @@ angular.module('bankFinder.main.map', ['ui.router'])
     $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=' + $scope.coordinates.latitude + '&lng=' + $scope.coordinates.longitude}).
     success(function(data, status, headers, config) {
       console.log("This is my bank info object", data);
-      $rootScope.banks = data.locations;
-      console.log("This schould be an array of locations", $rootScope.banks);
+      $scope.banks = data.locations;
+      console.log("This schould be an array of locations", $scope.banks);
       
-      for (var i = 0; i < $rootScope.banks.length; i++){
-          placeMarkers($rootScope.banks[i]);
+      for (var i = 0; i < $scope.banks.length; i++){
+          placeMarkers($scope.banks[i]);
       }
     }).
     error(function(data, status, headers, config) {
@@ -73,7 +73,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
     $scope.markers = [];
     
     var infoWindow = new google.maps.InfoWindow();
-    
+    var bankIcon = 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-3875d7/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/bank.png'
     var placeMarkers = function (bankInfo){
         $scope.bankInfo = bankInfo;
         var marker = new google.maps.Marker({
@@ -81,6 +81,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
             name: bankInfo.name,
             lat: $scope.bankInfo.lat,
             lng: $scope.bankInfo.lng,
+            icon: bankIcon,
             position: new google.maps.LatLng($scope.bankInfo.lat, $scope.bankInfo.lng)
         });
         marker.content = '<div class="infoWindow">' + '<h4>' + bankInfo.name + '</h4>' 
@@ -94,7 +95,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
         // });
 
         google.maps.event.addListener(marker, 'click', function(){
-          infoWindow.setContent('<h3>' + bankInfo.bank + '</h2>' + marker.content);
+          infoWindow.setContent('<h3>' + bankInfo.bank + '</h3>' + marker.content);
           infoWindow.open($scope.map, marker);
         });
 
