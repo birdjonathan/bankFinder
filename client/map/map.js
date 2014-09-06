@@ -9,7 +9,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
       controller: 'MapController'
     });
 })
-.controller('MapController', function ($scope, $rootScope, $http) { 
+.controller('MapController', function ($scope, $stateParams, $rootScope, $http) { 
   var siberia = new google.maps.LatLng(60, 105);
   var browserSupportFlag =  new Boolean();
 
@@ -76,13 +76,18 @@ angular.module('bankFinder.main.map', ['ui.router'])
     var infoWindow = new google.maps.InfoWindow();
     
     var placeMarkers = function (bankInfo){
-        
+        $scope.bankInfo = bankInfo;
         var marker = new google.maps.Marker({
             map: $scope.map,
             name: bankInfo.name,
-            position: new google.maps.LatLng(bankInfo.lat, bankInfo.lng)
+            lat: $scope.bankInfo.lat,
+            lng: $scope.bankInfo.lng,
+            position: new google.maps.LatLng($scope.bankInfo.lat, $scope.bankInfo.lng)
         });
-        marker.content = '<div class="infoWindow">' + '<h4>' + bankInfo.name + '</h4>' + '<p>' + bankInfo.address + '</p>' + '<p>' + bankInfo.locType + '</p>' + '<p>' + bankInfo.phone + '</p>' + '</div>';
+        marker.content = '<div class="infoWindow">' + '<h4>' + bankInfo.name + '</h4>' 
+        + '<p>' + bankInfo.address + '</p>' + '<p>' + bankInfo.locType + '</p>' 
+        + '<p>' + bankInfo.phone + '</p>' 
+        + '<a ui-sref="bankFinder.main.branchDetails({branchLat:' + bankInfo.lat + ', branchLng:' + bankInfo.lng + '})"> Click here for more info </a>' + '</div>';
         
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent('<h3>' + bankInfo.bank + '</h2>' + marker.content);

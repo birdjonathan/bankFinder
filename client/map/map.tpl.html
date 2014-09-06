@@ -3,6 +3,7 @@
     <div id="map"></div>
     <div id="class" ng-repeat="marker in markers | orderBy : 'name'">
          <a href="#" ng-click="openInfoWindow($event, marker)"></a>
+    <a ui-sref="bankFinder.main.branchDetails({branchLat: {{marker.lat}}, branchLng: {{marker.lng}} })"> Click here for more info </a>
     </div>
   <section>
     {{ message }}
