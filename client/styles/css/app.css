@@ -2,8 +2,17 @@
   color: #d3d3d3;
 }
 #map {
-  height: 480px;
-  width: 640px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+#top {
+  margin-top: 3px;
+}
+.no-sidebar {
+  padding: 100px;
+}
+.navbar-nav {
+  margin-bottom: 5px;
 }
 .infoWindow {
   font-size: 10px;
@@ -13,4 +22,7 @@
 h2 {
   margin-bottom: 0;
   margin-top: 0;
+}
+#bankInfo {
+  padding-top: 30px;
 }

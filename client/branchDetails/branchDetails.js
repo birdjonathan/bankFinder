@@ -26,7 +26,18 @@ angular.module('bankFinder.main.branchDetails', ['ui.router'])
             mapTypeId: google.maps.MapTypeId.TERRAIN
         }
 
-        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      var placeMarker = function (bankInfo){
+      $scope.bankInfo = bankInfo;
+      var marker = new google.maps.Marker({
+        map: $scope.map,
+        name: $scope.bank.name,
+        lat: $scope.latitude,
+        lng: $scope.longitude,
+        position: new google.maps.LatLng($scope.latitude, $scope.longitude)
+      });
+      }
+      placeMarker($scope.bank);
       // this callback will be called asynchronously
       // when the response is available
     }).
