@@ -18,7 +18,6 @@ angular.module('bankFinder.main.map', ['ui.router'])
   var mapOptions = {
         zoom: 4,
         center: new google.maps.LatLng(39.50, -98.35),
-        // center: new google.maps.LatLng(37.790594, -122.417317),
         mapTypeId: google.maps.MapTypeId.TERRAIN
     }
 
