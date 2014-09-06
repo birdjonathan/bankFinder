@@ -9,12 +9,10 @@ angular.module('bankFinder.main.branchDetails', ['ui.router'])
       controller: 'BranchDetailsController'
     });
 })
-.controller('BranchDetailsController', function ($scope, $stateParams, $rootScope, $http) {
+.controller('BranchDetailsController', function ($scope, $stateParams, $http) {
   $scope.message = 'Inside Branch Details State!';
   $scope.latitude = $stateParams.branchLat;
   $scope.longitude = $stateParams.branchLng;
-
-
 
   $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=' + $scope.latitude + '&lng=' + $scope.longitude}).
     success(function(data, status, headers, config) {
@@ -27,6 +25,7 @@ angular.module('bankFinder.main.branchDetails', ['ui.router'])
         }
 
       $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      var bankIcon = 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-3875d7/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/bank.png'
       var placeMarker = function (bankInfo){
       $scope.bankInfo = bankInfo;
       var marker = new google.maps.Marker({
@@ -34,6 +33,7 @@ angular.module('bankFinder.main.branchDetails', ['ui.router'])
         name: $scope.bank.name,
         lat: $scope.latitude,
         lng: $scope.longitude,
+        icon: bankIcon,
         position: new google.maps.LatLng($scope.latitude, $scope.longitude)
       });
       }

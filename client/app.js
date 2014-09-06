@@ -5,7 +5,7 @@
     'ui.router',
     'bankFinder.main'])
   .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/bankFinder/main/note');
+    $urlRouterProvider.otherwise('/bankFinder/main/map');
 
     $stateProvider
       .state('bankFinder', {
