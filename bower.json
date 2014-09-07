@@ -1,6 +1,6 @@
 {
   "name": "bank-finder",
-  "version": "",
+  "version": "1.2.3",
   "dependencies": {
     "bootstrap-css-only": "*",
     "angular": "*" ,
