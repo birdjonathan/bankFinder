@@ -2,8 +2,7 @@
   "name": "package",
   "version": "0.0.0",
   "scripts": {
-    "start": "node server/server.js",
-    "postinstall": "bower install"
+    "start": "node server/server.js"
 },
   "dependencies": {
     "express": "*",
