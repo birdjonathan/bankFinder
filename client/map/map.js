@@ -40,7 +40,14 @@ angular.module('bankFinder.main.map', ['ui.router'])
       console.log("This is my bank info object", data);
       $scope.banks = data.locations;
       console.log("This schould be an array of locations", $scope.banks);
-      
+      //  This places a red marker for the user's position 
+      var userMarker = new google.maps.Marker({
+        map: $scope.map,
+        lat: $scope.coordinates.latitude,
+        lng: $scope.coordinates.longitude,
+        position: new google.maps.LatLng($scope.coordinates.latitude, $scope.coordinates.longitude)
+      });
+
       for (var i = 0; i < $scope.banks.length; i++){
           placeMarkers($scope.banks[i]);
       }
@@ -69,7 +76,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
     }
     $scope.map.setCenter($scope.userLocation);
   }
-
+  
     $scope.markers = [];
     
     var infoWindow = new google.maps.InfoWindow();
