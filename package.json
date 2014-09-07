@@ -2,9 +2,6 @@
   "name": "bankFinder",
   "version": "0.0.0",
   "main": "server/server.js",
-  "scripts": {
-    "start": "node server/server.js"
-},
   "dependencies": {
     "express": "*",
     "mongoose": "*",
@@ -26,5 +23,8 @@
     "gulp-concat": "*",
     "gulp-uglify": "*",
     "gulp-less": "*"
-  }
+  },  
+  "scripts": {
+    "start": "node server/server.js"
+}
 }
