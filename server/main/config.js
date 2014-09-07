@@ -11,7 +11,7 @@ var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000
 
 // I would use an environmental variable here for a production app
 var mongodbUri = 'mongodb://heroku_app29310252:4keu6dboi2ngtpqb5jt7nsbhm7@ds035260.mongolab.com:35260/heroku_app29310252'
-mongoose.connect((mongodbUri, options) || 'mongodb://localhost/bankFinder');
+mongoose.connect(mongodbUri || 'mongodb://localhost/bankFinder');
 /*
  * Include all your global env variables here.
 */
