@@ -46,8 +46,13 @@ angular.module('bankFinder.main.map', ['ui.router'])
       $scope.map.setCenter($scope.userLocation); 
       $scope.map.setZoom(14);
       BankApiFactory.getData($scope.latitude, $scope.longitude, function(response){
-        $scope.banks = response;
-        console.log("This is my banks response object in the controller", response);
+        if (response.status === 200){
+          $scope.banks = response;
+          console.log("This is my banks response object in the controller", response);
+        } else{
+          console.log("The following error occured:", response);
+          alert(response);
+        }
       });
     // $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=' + $scope.coordinates.latitude + '&lng=' + $scope.coordinates.longitude}).
     // success(function(data, status, headers, config) {
