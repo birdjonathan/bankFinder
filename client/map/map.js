@@ -80,7 +80,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
     $scope.markers = [];
     
     var infoWindow = new google.maps.InfoWindow();
-    var bankIcon = 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-3875d7/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/bank.png'
+    var bankIcon = '../lib/img/bank.png';
     var placeMarkers = function (bankInfo){
         $scope.bankInfo = bankInfo;
         var marker = new google.maps.Marker({
