@@ -5,9 +5,7 @@
   "dependencies": {
     "express": "*",
     "mongoose": "*",
-    "q": "*"
-  },
-  "devDependencies": {
+    "q": "*",
     "gulp": "*",
     "gulp-bower": "*",
     "morgan": "*",
