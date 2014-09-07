@@ -25,7 +25,7 @@ angular.module('bankFinder.main.branchDetails', ['ui.router'])
         }
 
       $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      var bankIcon = 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-3875d7/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/bank.png'
+      var bankIcon = '../lib/img/bank.png';
       var placeMarker = function (bankInfo){
       $scope.bankInfo = bankInfo;
       var marker = new google.maps.Marker({
