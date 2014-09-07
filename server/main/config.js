@@ -1,7 +1,6 @@
 "use strict";
 
 var mongoose    = require('mongoose'),
-    morgan      = require('morgan'),
     bodyParser  = require('body-parser'),
     middle      = require('./middleware');
 
@@ -28,6 +27,44 @@ var html4 = '<h2> Queried (name.last = "Doe", age >64) Documents in MonogoDB dat
 var html5 = '</code></pre> <br\> <i>';
 var html6 = ' documents. </i> <br\> <br\> \
 <br\> <br\> <center><i> Demo code available at <a href="http://github.com/mongolab/hello-mongoose">github.com</a> </i></center>';
+
+/*
+ * Include all your global env variables here.
+*/
+module.exports = exports = function (app, express, routers) {
+  app.get('/mongo', function(req, res) {
+
+ PUser.find({}).exec(function(err, result) { 
+    if (!err) { 
+      res.write(html1 + JSON.stringify(result, undefined, 2) +  html2 + result.length + html3);
+      // Let's see if there are any senior citizens (older than 64) with the last name Doe using the query constructor
+      var query = PUser.find({'name.last': 'Doe'}); // (ok in this example, it's all entries)
+      query.where('age').gt(64);
+      query.exec(function(err, result) {
+  if (!err) {
+    res.end(html4 + JSON.stringify(result, undefined, 2) + html5 + result.length + html6);
+  } else {
+    res.end('Error in second query. ' + err)
+  }
+      });
+    } else {
+      res.end('Error in first query. ' + err)
+    };
+  });
+});
+  app.set('port', process.env.PORT || 9000);
+  app.set('base url', process.env.URL || 'http://localhost');
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(middle.cors);
+  app.use(express.static(__dirname + '/../../client'));
+  app.use('/note', routers.NoteRouter);
+  app.use(middle.logError);
+  app.use(middle.handleError);
+};
+
+
+
 
 mongoose.connect(uristring, function(err, res){  
   if (err) { 
@@ -80,44 +117,11 @@ var alicesmith = new PUser ({
 alicesmith.save(function (err) {if (err) console.log ('Error on save!')});
 
 
+
+
 // In case the browser connects before the database is connected, the
 // user will see this message.
 var found = ['DB Connection not yet established.  Try again later.  Check the console output for error messages if this persists.'];
 
-app.get('/mongo', function(req, res) {
-
- PUser.find({}).exec(function(err, result) { 
-    if (!err) { 
-      res.write(html1 + JSON.stringify(result, undefined, 2) +  html2 + result.length + html3);
-      // Let's see if there are any senior citizens (older than 64) with the last name Doe using the query constructor
-      var query = PUser.find({'name.last': 'Doe'}); // (ok in this example, it's all entries)
-      query.where('age').gt(64);
-      query.exec(function(err, result) {
-  if (!err) {
-    res.end(html4 + JSON.stringify(result, undefined, 2) + html5 + result.length + html6);
-  } else {
-    res.end('Error in second query. ' + err)
-  }
-      });
-    } else {
-      res.end('Error in first query. ' + err)
-    };
-  });
-});
 
 
-/*
- * Include all your global env variables here.
-*/
-module.exports = exports = function (app, express, routers) {
-  app.set('port', process.env.PORT || 9000);
-  app.set('base url', process.env.URL || 'http://localhost');
-  app.use(morgan('dev'));
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({extended: true}));
-  app.use(middle.cors);
-  app.use(express.static(__dirname + '/../../client'));
-  app.use('/note', routers.NoteRouter);
-  app.use(middle.logError);
-  app.use(middle.handleError);
-};
