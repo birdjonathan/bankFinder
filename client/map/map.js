@@ -9,7 +9,16 @@ angular.module('bankFinder.main.map', ['ui.router'])
       controller: 'MapController'
     });
 })
-.controller('MapController', function ($scope, $stateParams, $http) { 
+.controller('MapController', function ($scope, $stateParams, $http, BankApiFactory) { 
+  function getData(latitude, longitude) {
+    BankApiFactory.getData(latitude, longitude)
+      .success(function (data) {
+        console.log("You got an array of locations from the factory", data);
+      })
+      .error(function (error) {
+          console.log('That did not work: ' + error.message);
+      });
+  }
   var siberia = new google.maps.LatLng(60, 105);
   var browserSupportFlag =  new Boolean();
 
@@ -30,34 +39,39 @@ angular.module('bankFinder.main.map', ['ui.router'])
     navigator.geolocation.getCurrentPosition(function(position) {
       console.log("This is my position", position);
       $scope.coordinates = position.coords;
+      $scope.latitude = position.coords.latitude;
+      $scope.longitude = position.coords.longitude;
       console.log("this is my latitude", $scope.coordinates.latitude);
       $scope.userLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      $scope.map.setCenter($scope.userLocation);
+      $scope.map.setCenter($scope.userLocation); 
       $scope.map.setZoom(14);
-
-    $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=' + $scope.coordinates.latitude + '&lng=' + $scope.coordinates.longitude}).
-    success(function(data, status, headers, config) {
-      console.log("This is my bank info object", data);
-      $scope.banks = data.locations;
-      console.log("This schould be an array of locations", $scope.banks);
-      //  This places a red marker for the user's position 
-      var userMarker = new google.maps.Marker({
-        map: $scope.map,
-        lat: $scope.coordinates.latitude,
-        lng: $scope.coordinates.longitude,
-        position: new google.maps.LatLng($scope.coordinates.latitude, $scope.coordinates.longitude)
+      BankApiFactory.getData($scope.latitude, $scope.longitude, function(response){
+        $scope.banks = response;
+        console.log("This is my banks response object in the controller", response);
       });
+    // $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=' + $scope.coordinates.latitude + '&lng=' + $scope.coordinates.longitude}).
+    // success(function(data, status, headers, config) {
+    //   console.log("This is my bank info object", data);
+    //   $scope.banks = data.locations;
+    //   console.log("This schould be an array of locations", $scope.banks);
+    //   //  This places a red marker for the user's position 
+    //   var userMarker = new google.maps.Marker({
+    //    map: $scope.map,
+    //     lat: $scope.coordinates.latitude,
+    //     lng: $scope.coordinates.longitude,
+    //     position: new google.maps.LatLng($scope.coordinates.latitude, $scope.coordinates.longitude)
+    //   });
 
-      for (var i = 0; i < $scope.banks.length; i++){
-          placeMarkers($scope.banks[i]);
-      }
-    }).
-    error(function(data, status, headers, config) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-    });      
-    }, function() {
-      handleNoGeolocation(browserSupportFlag);
+    //   for (var i = 0; i < $scope.banks.length; i++){
+    //       placeMarkers($scope.banks[i]);
+    //   }
+    // }).
+    // error(function(data, status, headers, config) {
+    //   // called asynchronously if an error occurs
+    //   // or server returns response with an error status.
+    // });      
+    // }, function() {
+    //   handleNoGeolocation(browserSupportFlag);
     });
   }
   // Browser doesn't support Geolocation
