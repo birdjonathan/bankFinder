@@ -2,7 +2,7 @@
   'use strict';
   angular.module('bankFinder')
 
-  .factory('BankApiFactory', function($http, $q){
+  .factory('BankApiFactory', function($http){
     var urlBase = 'https://m.chase.com/PSRWeb/location/list.action?lat='
     var getData = {};
     var getData = function(latitude, longitude, callback){
