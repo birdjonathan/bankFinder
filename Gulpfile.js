@@ -7,6 +7,7 @@ var gulp    = require('gulp'),
     plumber = require('gulp-plumber'),
     client  = require('tiny-lr')(),
     nodemon = require('gulp-nodemon'),
+    shell   = require('gulp-shell'),
     lr_port = 35728,
     less   = require('gulp-less');
 
@@ -18,7 +19,9 @@ var paths = {
     css: ['!client/lib/**/*.css', 'client/styles/css/*.css', 'client/**/*.css'],
     less: ['client/styles/less/*.less', 'client/**/*.less'],
     dest: 'client/styles/css'
-  }
+  },
+    test: ['specs/**/*.js']
+
 };
 var build = ['less', 'css', 'lint'];
 
@@ -62,6 +65,10 @@ gulp.task('lint', function () {
     .pipe(refresh(client))
     .pipe(notify({message: 'Lint done'}));
 });
+
+gulp.task('karma', shell.task([
+  'karma start'
+]));
 
 gulp.task('serve', function () {
   nodemon({script: 'server/server.js', ignore: ['node_modules/**/*.js']})

@@ -113,6 +113,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
   };  
 
   initializeMap();
+  google.maps.event.addDomListener(window, "load", initializeMap);
   google.maps.event.addDomListener(window, 'resize', initializeMap);
 
 });

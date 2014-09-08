@@ -2,11 +2,10 @@
   "name": "bank-finder",
   "version": "",
   "dependencies": {
-    "angular": "1.2.10",
+    "angular": "*",
     "bootstrap-css-only": "*",
-    "angular": "*" ,
     "ngFx": "*",
-    "angular-ui-router": "*"
+    "angular-ui-router": "*",
+    "angular-mocks": "~1.2.23"
   }
 }
-
