@@ -4,7 +4,10 @@
   padding: 10px;
   width: 90%;
   text-align: center;
-  border: solid 5px black;
+  border: solid 2px #708090;
+}
+.navbar {
+  text-transform: uppercase;
 }
 body {
   font-size: 12px;
@@ -13,10 +16,13 @@ body {
   font-family: arial, verdana, helvetica, sans-serif;
 }
 .bordered {
-  border: solid 5px black;
+  border: solid 2px #708090;
 }
 #messages {
   color: #d3d3d3;
+}
+#map {
+  float: left;
 }
 #top {
   margin-top: 3px;
@@ -37,6 +43,6 @@ h2 {
   margin-top: 0;
 }
 #bankInfo {
-  margin-top: 15px;
-  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 }

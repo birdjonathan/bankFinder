@@ -1,73 +1,63 @@
-<div class="container-fluid">  <!-- Start container -->
-  <div class="row" id="top">  <!-- Start row -->
-    <div class="col-lg-7">
-      <div id="map" style="height:480px;
-    width:640px;">  <!-- Start left column -->
+  <div class="row">
+    <div class="col-lg-6"><!-- Start left column -->
+      <div id="map" style="height:400px;
+    width:100%;">  
       </div>  <!-- End left column -->
     </div>
-    <div class="col-lg-5" id="bankInfo">  <!-- Start right column -->
-      <h2>{{bank.bank}} {{bank.name}}</h2>
-      <table class="table table-hover table-condensed">  <!-- Table showing branch info pulled from controller -->
-        <tr>
-          <th>Category</th>
-          <th>Location Details</th>
-        </tr>
-        <tr>
-          <td>Type </td>
-          <td>{{bank.locType}}</td>
-        </tr>
-        <tr>
-          <td> Address </td>
-          <td>{{bank.address}}</td>
-        </tr>
-        <tr>
-          <td>Location </td>
-          <td>{{bank.city}}, {{bank.state}}
-        </tr>
-        <tr>
-          <td>Zip </td>
-          <td>{{bank.zip}}</td>
-        </tr>
-        <tr>
-          <td>Telephone </td>
-          <td>{{bank.phone}}</td>
-        </tr>
-      </table>
-      <h3> Branch Hours </h3>
-        <table class="table table-hover table-condensed">
-        <tr>
-          <th>Day</th>
-          <th>Hours</th>
-        </tr>
-        <tr>
-          <td>Sunday </td>
-          <td>Closed</td>
-        </tr>
-        <tr>
-          <td>Monday </td>
-          <td>{{bank.lobbyHrs[1]}}</td>
-        </tr>
-        <tr>
-          <td>Tuesday</td>
-          <td>{{bank.lobbyHrs[2]}}</td>
-        </tr>
-        <tr>
-          <td>Wednesday </td>
-          <td>{{bank.lobbyHrs[3]}}</td>
-        </tr>
-        <tr>
-          <td>Thursday </td>
-          <td>{{bank.lobbyHrs[4]}}</td>
-        </tr>
-         <tr>
-          <td>Friday </td>
-          <td>{{bank.lobbyHrs[5]}}</td>
-        </tr>
-         <tr>
-          <td>Saturday </td>
-          <td>{{bank.lobbyHrs[6]}}</td>
-        </tr>
-      </table>
+    <div class="col-lg-6" id="bankInfo">  <!-- Start right column -->
+      <h2> {{bank.bank}} {{bank.name}} </h2>
+      <br>
+      <table class="table table-bordered">
+            <tr>
+              <td> Type </td>
+              <td>{{bank.type}} {{bank.locType}}</td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>{{bank.address}}</td>
+            </tr>
+            <tr>
+              <td> City and State: </td>
+              <td>{{bank.city}}, {{bank.state}}</td>
+            </tr>
+            <tr>
+              <td> Zipcode: </td>
+              <td>{{bank.zip}} </td>
+            </tr>
+            <tr> 
+              <td> Phone </td>
+              <td> {{bank.phone}}</td>
+            </tr>
+            <tr>
+              <td> Number of ATMs: </td>
+              <td> {{bank.atms}}
+          </table>
+      </div> 
+      
+      <div class="row" id="bankInfo">
+        <div class="col-lg-6">
+          <h3> Branch Information </h3>
+          <table class="table table-bordered">
+            <tr>
+              <th>Sunday</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+            </tr>
+            <tr>
+              <td>Closed</td>
+              <td>{{bank.lobbyHrs[1]}}</td>
+              <td>{{bank.lobbyHrs[2]}}</td>
+              <td>{{bank.lobbyHrs[3]}}</td>
+              <td>{{bank.lobbyHrs[4]}}</td>
+              <td>{{bank.lobbyHrs[5]}}</td>
+              <td>{{bank.lobbyHrs[6]}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>  <!-- End right column -->
-  </div> <!-- End row -->
-</div> <!-- End container -->
+  </div>  <!--- End row -->
