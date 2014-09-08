@@ -14,20 +14,24 @@ angular.module('bankFinder.main.map', ['ui.router'])
   var sanFrancisco = new google.maps.LatLng(37.7833, 122.4167);
   var browserSupportFlag =  new Boolean();  
  // Centers intial google map and shows entire continental USA 
-  var mapOptions = {
-    zoom: 4,
-    center: new google.maps.LatLng(39.50, -98.35),
-    mapTypeId: google.maps.MapTypeId.TERRAIN
+  var initializeMap = function (){
+    var mapOptions = {
+      zoom: 4,
+      center: new google.maps.LatLng(39.50, -98.35),
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+    // Creates a new google map and places map object in scope
+    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    $scope.markers = []; 
   };
+  google.maps.event.addDomListener(window, 'load', initializeMap);
+  google.maps.event.addDomListener(window, 'resize', initializeMap);
   var infoWindow = new google.maps.InfoWindow();
   // Opens info window when user clicks on marker
   $scope.openInfoWindow = function(e, selectedMarker){
     e.preventDefault();
     google.maps.event.trigger(selectedMarker, 'click');
   };
-  // Creates a new google map and places map object in scope
-  $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-  $scope.markers = []; 
   // If user's Geolocation service fails or is not supported, places map over San Francisco
   var handleNoGeolocation = function(errorFlag) {
     if (errorFlag == true) {
@@ -71,6 +75,7 @@ angular.module('bankFinder.main.map', ['ui.router'])
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
       $scope.userLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      initializeMap();
       $scope.map.setCenter($scope.userLocation); 
       $scope.map.setZoom(14);
       // After querying user's location, place marker on map to represent user position
