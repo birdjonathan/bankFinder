@@ -39,16 +39,16 @@ angular.module('bankFinder.main.map', ['ui.router'])
     }
     $scope.map.setCenter($scope.userLocation);
   };
-  // Creates markers and places them on previously initialized map
-  var placeMarkers = function (bankInfo){
+  // Creates one marker and places it on previously initialized map
+  var placeMarker = function (bankInfo){
     var bankIcon = '../lib/img/bank.png';
     $scope.bankInfo = bankInfo;
   // Each marker contains information from the banks object returned by the factory
     var marker = new google.maps.Marker({
         map: $scope.map,
         name: bankInfo.name,
-        lat: $scope.bankInfo.lat,
-        lng: $scope.bankInfo.lng,
+        lat: bankInfo.lat,
+        lng: bankInfo.lng,
         icon: bankIcon,
         position: new google.maps.LatLng($scope.bankInfo.lat, $scope.bankInfo.lng)
     });
@@ -73,56 +73,33 @@ angular.module('bankFinder.main.map', ['ui.router'])
       $scope.userLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       $scope.map.setCenter($scope.userLocation); 
       $scope.map.setZoom(14);
+      // After querying user's location, place marker on map to represent user position
+      var userMarker = new google.maps.Marker({
+        map: $scope.map,
+        lat: latitude,
+        lng: longitude,
+        position: new google.maps.LatLng(latitude, longitude)
+      });
+      // Function calls factory, which makes api call to restful API and returns bank object as a promise
       BankApiFactory.getData(latitude, longitude, function(response){
         if (response.status === 200){
           $scope.banks = response.data.locations;
           console.log("This is my banks response object in the controller", response);
-          var userMarker = new google.maps.Marker({
-            map: $scope.map,
-            lat: $scope.coordinates.latitude,
-            lng: $scope.coordinates.longitude,
-            position: new google.maps.LatLng($scope.coordinates.latitude, $scope.coordinates.longitude)
-          });
+        // Place all markers on google map
           for (var i = 0; i < $scope.banks.length; i++){
-              placeMarkers($scope.banks[i]);
+              placeMarker($scope.banks[i]);
           }
-        } else{
+        } else{  // Error handling
             console.log("The following error occured:", response);
             alert(response);
           }
         });
       })
-  } else {
+  } else {  // If the browser does not support geolocation, tell user
     browserSupportFlag = false;
     handleNoGeolocation(browserSupportFlag);
   }
 });
 
-
-      
-    // $http({method: 'GET', url: 'https://m.chase.com/PSRWeb/location/list.action?lat=' + $scope.coordinates.latitude + '&lng=' + $scope.coordinates.longitude}).
-    // success(function(data, status, headers, config) {
-    //   console.log("This is my bank info object", data);
-    //   $scope.banks = data.locations;
-    //   console.log("This schould be an array of locations", $scope.banks);
-    //   //  This places a red marker for the user's position 
-    //   var userMarker = new google.maps.Marker({
-    //    map: $scope.map,
-    //     lat: $scope.coordinates.latitude,
-    //     lng: $scope.coordinates.longitude,
-    //     position: new google.maps.LatLng($scope.coordinates.latitude, $scope.coordinates.longitude)
-    //   });
-
-    //   for (var i = 0; i < $scope.banks.length; i++){
-    //       placeMarkers($scope.banks[i]);
-    //   }
-    // }).
-    // error(function(data, status, headers, config) {
-    //   // called asynchronously if an error occurs
-    //   // or server returns response with an error status.
-    // });      
-    // }, function() {
-    //   handleNoGeolocation(browserSupportFlag);
-  // Browser doesn't support Geolocation
 
 
