@@ -17,8 +17,16 @@ angular.module('bankFinder.main.branchDetails', ['ui.router'])
       center: new google.maps.LatLng($scope.latitude, $scope.longitude),
       mapTypeId: google.maps.MapTypeId.TERRAIN
   };
+  var infoWindow = new google.maps.InfoWindow();
+  // Opens info window when user clicks on marker
+  $scope.openInfoWindow = function(e, selectedMarker){
+    e.preventDefault();
+    google.maps.event.trigger(selectedMarker, 'click');
+  };
   $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
   var bankIcon = '../lib/img/bank.png';
+  //This function place a single marker on the map, in the future should refactor this
+  // since it does basically the same thing as a similar function in the map controller
   var placeMarker = function (bankInfo){
     $scope.bankInfo = bankInfo;
     var marker = new google.maps.Marker({
@@ -29,6 +37,14 @@ angular.module('bankFinder.main.branchDetails', ['ui.router'])
       icon: bankIcon,
       position: new google.maps.LatLng($scope.latitude, $scope.longitude)
     });
+    marker.content = '<div class="infoWindow">' + '<h4>' + bankInfo.name + '</h4>' 
+    + '<p>' + 'Address: '+ bankInfo.address + '</p>' + '<p>' + 'Location Type: ' + bankInfo.locType + '</p>' 
+    + '<p>' + 'Telephone: ' + bankInfo.phone + '</p>';
+
+    google.maps.event.addListener(marker, 'click', function(){
+      infoWindow.setContent('<h3>' + bankInfo.bank + '</h3>' + marker.content);
+      infoWindow.open($scope.map, marker);
+    });  
   };
   BankApiFactory.getData($scope.latitude, $scope.longitude, function(response){
     if (response.status === 200){

@@ -53,8 +53,8 @@ angular.module('bankFinder.main.map', ['ui.router'])
         position: new google.maps.LatLng($scope.bankInfo.lat, $scope.bankInfo.lng)
     });
     marker.content = '<div class="infoWindow">' + '<h4>' + bankInfo.name + '</h4>' 
-    + '<p>' + bankInfo.address + '</p>' + '<p>' + bankInfo.locType + '</p>' 
-    + '<p>' + bankInfo.phone + '</p>' 
+    + '<p>' + 'Address: '+ bankInfo.address + '</p>' + '<p>' +'Location Type: '+ bankInfo.locType + '</p>' 
+    + '<p>'+'Telephone: ' + bankInfo.phone + '</p>' 
     + '<a href="#/bankFinder/main/branchDetails/' + marker.lat + '/' + marker.lng + '"> Click here for more info </a>' + '</div>';
   
     google.maps.event.addListener(marker, 'click', function(){
