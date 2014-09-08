@@ -1,6 +1,6 @@
 <div class="col-lg-12">
-  <div id="map" style="height: 500px;
-width: 1000px;">  
+  <div id="map" style="height: 450px;
+width: 100%;">  
       <div id="class" ng-repeat="marker in markers">
         <a href="#" ng-click="openInfoWindow($event, marker)"></a>
       <a ui-sref="bankFinder.main.branchDetails({branchLat: {{marker.lat}}, branchLng: {{marker.lng}} })"> Click here for more info </a>
